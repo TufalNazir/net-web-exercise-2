@@ -1,0 +1,101 @@
+<p-dialog [(visible)]="showStudentForm">
+
+</p-dialog>
+
+<div class="px-5 min-h-screen min-w-screen flex-column flex">
+  <div class="flex align-items-center justify-content-between">
+    <div>
+      <h1>
+        Student Management
+      </h1>
+    </div>
+  </div>
+  <div class="mt-4 h-full flex-grow-1">
+    <div class="grid h-full">
+      <div class="col-12 lg:col-7 xl:col-8">
+        <p-table [value]="students">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Contact</th>
+              <th>Email</th>
+              <th>Address</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-student>
+            <tr>
+              <td>{{ student.firstName ? student.firstName : 'N/A' }}</td>
+              <td>{{ student.lastName ? student.lastName : 'N/A' }}</td>
+              <td>{{ student.contactNumber ? student.contactNumber : 'N/A' }}</td>
+              <td>{{ student.email ? student.email : 'N/A' }}</td>
+              <td>{{ student.address ? student.address : 'N/A' }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+
+        <div *ngIf="students.length === 0" class="mt-8 px-3 text-xl text-center">
+          Not Data Found
+        </div>
+      </div>
+
+      <div class="col-12 lg:col-5 xl:col-4 border-left-1 surface-border px-4">
+        <div class="mt-1 text-xl text-center font-medium border-bottom-1 surface-border pb-3">
+          New Student
+        </div>
+
+        <div class="mt-4">
+          <form [formGroup]="studentForm">
+
+            <div *ngFor="let field of formData">
+              <div class="flex flex-column gap-2">
+                <label class="capitalize mt-3" for="{{field?.controlName}}">{{ field?.controlName }}
+                  <sup *ngIf="field?.isRequired"
+                       class="text-red-500">*</sup></label>
+                <input formControlName="{{field?.controlName}}" type="text" pInputText id="{{field.controlName}}"
+                />
+              </div>
+            </div>
+
+            <!--            <div class="flex flex-column gap-2">-->
+            <!--              <label for="firstName">First name<sup class="text-red-500">*</sup></label>-->
+            <!--              <input formControlName="firstName" type="text" pInputText id="firstName"-->
+            <!--              />-->
+            <!--            </div>-->
+            <!--            <div class="flex flex-column gap-2 mt-3">-->
+            <!--              <label for="lastName">Last name<sup class="text-red-500">*</sup></label>-->
+            <!--              <input formControlName="lastName" type="text" pInputText id="lastName"-->
+            <!--              />-->
+            <!--            </div>-->
+
+            <!--            <div class="flex flex-column gap-2 mt-3">-->
+            <!--              <label for="email">Email Address</label>-->
+            <!--              <input formControlName="email" type="text" pInputText id="email"-->
+            <!--              />-->
+            <!--            </div>-->
+
+            <!--            <div class="flex flex-column gap-2 mt-3">-->
+            <!--              <label for="contactNumber">Contact Number<sup class="text-red-500">*</sup></label>-->
+            <!--              <input formControlName="contactNumber" type="text" pInputText id="contactNumber"-->
+            <!--              />-->
+            <!--            </div>-->
+
+            <!--            <div class="flex flex-column gap-2 mt-3">-->
+            <!--              <label for="address">Address<sup class="text-red-500">*</sup></label>-->
+            <!--              <textarea rows="8" formControlName="address" type="text" pInputTextarea id="address"-->
+            <!--              ></textarea>-->
+            <!--            </div>-->
+
+            <div class="mt-4">
+              <button [disabled]="!this.studentForm.valid" (click)="onClickOfAddNewStudent()" class="w-full" pButton label="Save"></button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</div>
