@@ -86,8 +86,14 @@
             <!--              ></textarea>-->
             <!--            </div>-->
 
-            <div class="mt-4">
-              <button [disabled]="!this.studentForm.valid" (click)="onClickOfAddNewStudent()" class="w-full" pButton label="Save"></button>
+            <div class="mt-4 flex flex-column md:flex-row align-items-start md:align-items-center w-full gap-3 justify-content-end">
+              <div>
+                <button [disabled]="!this.studentForm.valid" (click)="onClickOfAddNewStudent()" class="w-full md:w-10rem" pButton
+                        label="Save"></button>
+              </div>
+              <div>
+                <button pButton class="p-button-secondary p-button-outlined w-full md:w-10rem" (click)="onFormReset()"  label="Reset"></button>
+              </div>
             </div>
 
           </form>

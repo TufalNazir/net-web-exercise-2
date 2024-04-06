@@ -85,6 +85,7 @@ export class StudentComponent implements OnInit {
     console.log(this.studentForm.value);
     this.students.unshift(this.studentForm.value);
     localStorage.setItem('students', JSON.stringify(this.students));
+    this.onFormReset();
   }
 
   initializeForm() {
@@ -100,6 +101,10 @@ export class StudentComponent implements OnInit {
 
     // Create the FormGroup with the dynamically added form controls
     this.studentForm = new FormGroup(formGroupConfig);
+  }
+
+  onFormReset() {
+    this.studentForm.reset();
   }
 
 }
